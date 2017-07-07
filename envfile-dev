@@ -1,0 +1,12 @@
+PGDATA=/var/lib/postgresql/data/app-dev
+POSTGRES_DB=app
+POSTGRES_USER=app_user
+POSTGRES_PASSWORD=passw0rd
+
+FLASK_APP=auto.py
+FLASK_DEBUG=1
+FLASK_SECRET=secret
+FLASK_LOGGER_NAME=app_logger
+
+HOST=dev
+NGINX_TEMPLATE=nginx-dev.conf

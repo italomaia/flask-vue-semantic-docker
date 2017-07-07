@@ -1,0 +1,13 @@
+version: '3.2'
+
+services:
+  server:
+    ports:
+    - 80:80
+    - 443:443
+    volumes:
+    - ux-dist: /usr/share/nginx/html
+  ux:
+    command: ["yarn", "run", "build"]
+  styles:
+    command: ["gulp", "--cwd=semantic", "build"]

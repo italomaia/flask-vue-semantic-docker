@@ -1,0 +1,17 @@
+version: '3.2'
+
+services:
+  app:
+    volumes:
+    - ./app:/home/nonroot
+  server:
+    links:
+    - ux
+  ux:
+    command: ["yarn", "run", "watch"]
+    volumes:
+    - ./ux:/home/node
+  styles:
+    command: ["gulp", "--cwd=semantic", "watch"]
+    volumes:
+    - ./styles:/home/node

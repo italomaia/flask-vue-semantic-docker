@@ -1,0 +1,38 @@
+version: '3.2'
+
+volumes:
+  db-data:
+  ux-dist:
+  styles-dist:
+
+services:
+  app:
+    build: ./app
+    env_file:
+    - ./envfile
+    links:
+    - db
+  db:
+    image: postgres:9.6
+    env_file:
+    - ./envfile
+    volumes:
+    - db-data: /var/lib/postgresql/data/
+  server:
+    build: ./server
+    env_file:
+    - ./envfile
+    links:
+    - ux
+  styles:
+    build: ./styles
+    env_file:
+    - ./envfile
+    volumes:
+    - styles-dist: /home/node/dist/
+  ux:
+    build: ./ux
+    env_file:
+    - ./envfile
+    volumes:
+    - ux-dist: /home/node/dist/
