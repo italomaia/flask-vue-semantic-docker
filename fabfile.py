@@ -2,7 +2,7 @@ from fabric.api import env
 from fabric.api import local
 from fabric.api import run
 from fabric.api import task
-from fabric.context_managers import cd
+from fabric.context_managers import cd, lcd
 
 env.forward_agent = True
 env.user = 'root'
@@ -24,6 +24,46 @@ def get_compose_cmd():
         raise Exception('env was unset')
 
     return compose_cmd + ['docker-compose-%s.yml' % renv]
+
+
+def get_fn():
+    return run if env == 'prd' else local
+
+
+def get_cmd_exists(cmd):
+    def tell_on(arg, rs):
+        if rs:
+            print('"%s" found in path.' % arg)
+        else:
+            print('"%s" not found in path. Cannot continue.' % arg)
+        return rs
+
+    fn = get_fn()
+    rs = fn('which %s' % cmd, capture=True)
+    return tell_on(cmd, ('not found' not in rs))
+
+
+@task(alias='setup')
+def do_setup():
+    """
+    Helps you setup your environment. Call it once per project.
+    """
+    assert get_cmd_exists('vue')
+    assert get_cmd_exists('npm')
+    assert get_cmd_exists('fab')
+    assert get_cmd_exists('docker')
+    assert get_cmd_exists('docker-compose')
+
+    print("We'll now setup VueJS (just accept defaults)")
+    local('vue init webpack ux')
+
+    print("We'll now setup SemanticUI (just accept defaults)")
+    with lcd('styles'):
+        local('npm install semantic-ui')
+
+    print('Execute:')
+    print('  fab env:dev up  # for development mode')
+    print('  fab env:prd up  # for production mode')
 
 
 @task(alias='env')
