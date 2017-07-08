@@ -1,3 +1,4 @@
 *.pyc
 .vscode
+.bash_history
 node_modules
