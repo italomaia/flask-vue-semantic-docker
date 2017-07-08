@@ -1,6 +1,6 @@
 # What is this?
 
-Setting up docker + nginx + flask + vue + semantic is hardly an easy task if
+Setting up **docker** + **nginx** + **flask** + **vue** + **semantic** is hardly an easy task if
 you want to setup production and development environments. This is my attempt
 in the matter. Notice that, some containers are not complete (ux)
 because, well, vue does not have a non interactive install.
