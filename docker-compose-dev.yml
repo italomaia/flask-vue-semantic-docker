@@ -7,6 +7,9 @@ services:
   server:
     links:
     - ux
+    ports:
+    - 8080:80
+    - 8081:443
   ux:
     command: ["yarn", "run", "watch"]
     volumes:
