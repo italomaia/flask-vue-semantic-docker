@@ -1,20 +1,36 @@
 version: '3.2'
 
+volumes:
+  ux-modules:
+    driver: local
+  sm-modules:
+    driver: local
+
 services:
   app:
+    env_file:
+    - ./envfile-dev
     volumes:
     - ./app:/home/nonroot
   server:
+    env_file:
+    - ./envfile-dev
     links:
     - ux
     ports:
     - 8080:80
     - 8081:443
   ux:
-    command: ["yarn", "run", "watch"]
+    command: ["npm", "run", "dev"]
+    env_file:
+    - ./envfile-dev
     volumes:
     - ./ux:/home/node
+    - ux-modules:/home/node/node_modules
   styles:
     command: ["gulp", "--cwd=semantic", "watch"]
+    env_file:
+    - ./envfile-dev
     volumes:
     - ./styles:/home/node
+    - sm-modules:/home/node/node_modules
