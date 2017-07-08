@@ -2,10 +2,19 @@ version: '3.2'
 
 volumes:
   db-data:
+    driver: local
   ux-dist:
+    driver: local
   styles-dist:
+    driver: local
 
 services:
+  server:
+    build: ./server
+    env_file:
+    - ./envfile
+    links:
+    - app
   app:
     build: ./app
     env_file:
@@ -17,22 +26,16 @@ services:
     env_file:
     - ./envfile
     volumes:
-    - db-data: /var/lib/postgresql/data/
-  server:
-    build: ./server
-    env_file:
-    - ./envfile
-    links:
-    - ux
+    - db-data:/var/lib/postgresql/data/
   styles:
     build: ./styles
     env_file:
     - ./envfile
     volumes:
-    - styles-dist: /home/node/dist/
+    - styles-dist:/home/node/dist/
   ux:
     build: ./ux
     env_file:
     - ./envfile
     volumes:
-    - ux-dist: /home/node/dist/
+    - ux-dist:/home/node/dist/
