@@ -2,3 +2,4 @@
 .vscode
 .bash_history
 node_modules
+dist
