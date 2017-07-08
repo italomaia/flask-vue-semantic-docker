@@ -1,7 +1,8 @@
-from fabric.context_managers import cd
 from fabric.api import env
+from fabric.api import local
 from fabric.api import run
 from fabric.api import task
+from fabric.context_managers import cd
 
 env.forward_agent = True
 env.user = 'root'
@@ -35,19 +36,21 @@ def set_renv(local_renv):
 
 @task(alias='up')
 def compose_up(name=None):
-    opt = []
+    fn = run if env == 'prd' else local
+    opt = ['-d'] if renv == 'prd' else []
+
     with cd(project_dst):
-        opt += ['-d'] if renv == 'prd' else []
         local_cmd = get_compose_cmd() + ['up']
         local_cmd += opt
         local_cmd += [name] if name else []
-        run(' '.join(local_cmd))
+        fn(' '.join(local_cmd))
 
 
 @task(alias='build')
 def compose_build(name=None):
+    fn = run if env == 'prd' else local
     with cd(project_dst):
         local_cmd = get_compose_cmd() + ['build']
         local_cmd += [name] if name else []
 
-        run(' '.join(local_cmd))
+        fn(' '.join(local_cmd))
