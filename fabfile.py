@@ -1,7 +1,7 @@
-from fabric import cd
-from fabric import env
-from fabric import run
-from fabric import task
+from fabric.context_managers import cd
+from fabric.api import env
+from fabric.api import run
+from fabric.api import task
 
 env.forward_agent = True
 env.user = 'root'
