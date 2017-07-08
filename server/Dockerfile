@@ -1,6 +1,10 @@
 FROM nginx:1
 
+EXPOSE 80
+EXPOSE 443
+
 COPY . .
-RUN chmod +x /root/entrypoint.sh
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
 CMD ["nginx", "-g", "daemon off;"]
-ENTRYPOINT ["/root/entrypoint.sh"]
+ENTRYPOINT ["/entrypoint.sh"]
