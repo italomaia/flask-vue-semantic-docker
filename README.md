@@ -29,6 +29,12 @@ fab env:prd logs:name  # docker logs on container called <name>
 
 ## Changelog
 
+**0.2.1**
+
+* installed extensions are now properly loaded
+* added basic "auth" app implementation (for authentication)
+* added some sensitive defaults for sqlalchemy configuration
+
 **0.2**
 
 * update to flask app dependencies (+flask-jsglue +flask-marshmallow +flask-migrate +flask-security +flask-sqlalchemy)
