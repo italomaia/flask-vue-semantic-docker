@@ -26,3 +26,13 @@ fab env:prd logs:name  # docker logs on container called <name>
 * server -> nginx container
 * styles -> semantic-ui container
 * ux -> vuejs application container
+
+## Changelog
+
+**0.2**
+
+* update to flask app dependencies (+flask-jsglue +flask-marshmallow +flask-migrate +flask-security +flask-sqlalchemy)
+
+**0.1**
+
+* initial version (docker + flask + vuejs + semantic-ui)
