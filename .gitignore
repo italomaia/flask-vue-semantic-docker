@@ -1,4 +1,5 @@
 *.pyc
+.v8flags*
 .vscode
 .bash_history
 node_modules
