@@ -2,9 +2,8 @@ FROM python:3.6
 
 ENV USR nonroot
 ENV HOME /home/$USR
-ENV FLASK_PORT 5000
 
-EXPOSE $FLASK_PORT
+EXPOSE 5000
 
 RUN groupadd -g 1000 -r $USR && \
   useradd -u 1000 -d $HOME -m -r -g $USR $USR
