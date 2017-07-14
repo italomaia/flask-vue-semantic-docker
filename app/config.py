@@ -12,6 +12,11 @@ EXTENSIONS = list(map(lambda e: 'extensions.' + e, [
     'security'
 ]))
 
+# Make sure SERVER_NAME contains the access port for
+# the http server if it is not a default port (ex: dev:8080)
+# Also, add "127.0.0.1 dev" to your /etc/hosts during development
+SERVER_NAME = os.getenv('SERVER_NAME')
+
 PSYCOPG2_URI = 'postgresql+psycopg2://{user}:{passwd}@{host}/{name}'
 SQLALCHEMY_DATABASE_URI = PSYCOPG2_URI.format(
     user=os.getenv('POSTGRES_USER'),
