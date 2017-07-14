@@ -13,6 +13,8 @@ services:
     volumes:
     - ./app:/home/nonroot
   server:
+    command: ["nginx-debug", "-g", "daemon off;"]
+    entrypoint: ["./entrypoint.sh"]
     env_file:
     - ./envfile-dev
     links:
