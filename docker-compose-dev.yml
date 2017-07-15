@@ -1,11 +1,5 @@
 version: '3.2'
 
-volumes:
-  ux-modules:
-    driver: local
-  sm-modules:
-    driver: local
-
 services:
   app:
     env_file:
@@ -27,12 +21,13 @@ services:
     env_file:
     - ./envfile-dev
     volumes:
-    - ./ux:/home/node
-    - ux-modules:/home/node/node_modules
+    - ./ux/build:/home/node/build
+    - ./ux/src:/home/node/src
+    - ./ux/static:/home/node/static
+    - ./ux/test:/home/node/test
   styles:
     command: ["gulp", "--cwd=semantic", "watch"]
     env_file:
     - ./envfile-dev
     volumes:
-    - ./styles:/home/node
-    - sm-modules:/home/node/node_modules
+    - ./styles/semantic:/home/node/semantic
