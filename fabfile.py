@@ -20,14 +20,11 @@ renv = 'dev'  # dev by default
 
 
 def get_compose_cmd():
-    if renv is None:
-        raise Exception('env was unset')
-
     return compose_cmd + ['docker-compose-%s.yml' % renv]
 
 
 def get_fn():
-    return run if env == 'prd' else local
+    return run if renv == 'prd' else local
 
 
 def get_cmd_exists(cmd):
@@ -76,21 +73,19 @@ def set_renv(local_renv):
 
 @task(alias='up')
 def compose_up(name=None):
-    fn = run if env == 'prd' else local
     opt = ['-d'] if renv == 'prd' else []
 
     with cd(project_dst):
         local_cmd = get_compose_cmd() + ['up']
         local_cmd += opt
         local_cmd += [name] if name else []
-        fn(' '.join(local_cmd))
+        get_fn()(' '.join(local_cmd))
 
 
 @task(alias='build')
 def compose_build(name=None):
-    fn = run if env == 'prd' else local
     with cd(project_dst):
         local_cmd = get_compose_cmd() + ['build']
         local_cmd += [name] if name else []
 
-        fn(' '.join(local_cmd))
+        get_fn()(' '.join(local_cmd))
