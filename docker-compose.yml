@@ -39,3 +39,4 @@ services:
     - ./envfile
     volumes:
     - ux-dist:/home/node/dist/
+    - styles-dist:/home/node/src/styles/
