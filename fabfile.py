@@ -45,18 +45,19 @@ def do_setup():
     """
     Helps you setup your environment. Call it once per project.
     """
-    assert get_cmd_exists('vue')
-    assert get_cmd_exists('npm')
-    assert get_cmd_exists('fab')
-    assert get_cmd_exists('docker')
-    assert get_cmd_exists('docker-compose')
+    msg = "Command not found. Please, install %s"
+    assert get_cmd_exists('vue'), msg % "vue-cli"
+    assert get_cmd_exists('npm'), msg % "npm"
+    assert get_cmd_exists('fab'), msg % "fabric3"
+    assert get_cmd_exists('docker'), msg % "docker"
+    assert get_cmd_exists('docker-compose'), msg % "docker-compose"
 
     print("Setting up VueJS (just accept defaults)")
-    local('vue init webpack ux')
+    local('vue init webpack ux', shell='/bin/bash')
 
     print("Setting up SemanticUI (just accept defaults)")
     with lcd('styles'):
-        local('npm install semantic-ui')
+        local('npm install semantic-ui', shell='/bin/bash')
         print(
             "IMPORTANT: make sure to change semantic.json "
             "property 'autoInstall' to false")
