@@ -5,6 +5,7 @@ ENV HOME /home/$USR
 
 WORKDIR $HOME
 COPY . .
+RUN chmod +x entrypoint.sh
 RUN chown -R 1000:1000 .
 
 USER $USR
