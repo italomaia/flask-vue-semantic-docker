@@ -51,16 +51,24 @@ def do_setup():
     assert get_cmd_exists('docker')
     assert get_cmd_exists('docker-compose')
 
-    print("We'll now setup VueJS (just accept defaults)")
+    print("Setting up VueJS (just accept defaults)")
     local('vue init webpack ux')
 
-    print("We'll now setup SemanticUI (just accept defaults)")
+    print("Setting up SemanticUI (just accept defaults)")
     with lcd('styles'):
         local('npm install semantic-ui')
+        print(
+            "IMPORTANT: make sure to change semantic.json "
+            "property 'autoInstall' to false")
+    print(
+        "IMPORTANT: run the following command:\n"
+        "sudo echo \"127.0.0.1  dev\" >> /etc/hosts")
 
-    print('Execute:')
+    print("You're ready to go:")
     print('  fab env:dev up  # for development mode')
     print('  fab env:prd up  # for production mode')
+    print('  fab env:tst up  # to simulate production mode')
+    print('Locally, your project will be available at http://dev:8080')
 
 
 @task(alias='env')
