@@ -1,0 +1,27 @@
+version: '3.2'
+
+services:
+  app:
+    env_file:
+    - ./envfile-dev
+    - ./envfile-tst
+  server:
+    env_file:
+    - ./envfile-dev
+    - ./envfile-tst
+    ports:
+    - 8080:80
+    - 8081:443
+    volumes:
+    - type: volume
+      source: ux-dist
+      target: /usr/share/nginx/html
+      read_only: true
+  ux:
+    env_file:
+    - ./envfile-dev
+    - ./envfile-tst
+  styles:
+    env_file:
+    - ./envfile-dev
+    - ./envfile-tst
