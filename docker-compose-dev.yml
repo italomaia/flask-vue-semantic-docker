@@ -5,7 +5,35 @@ services:
     env_file:
     - ./envfile-dev
     volumes:
-    - ./app:/home/nonroot
+    - type: bind
+      source: ./app
+      target: /home/nonroot
+  ux:
+    command: ["npm", "run", "dev"]
+    entrypoint: ["./entrypoint.sh"]
+    env_file:
+    - ./envfile-dev
+    volumes:
+    - type: bind
+      source: ./ux/build
+      target: /home/node/build
+    - type: bind
+      source: ./ux/src
+      target: /home/node/src
+    - type: bind
+      source: ./ux/static
+      target: /home/node/static
+    - type: bind
+      source: ./ux/test
+      target: /home/node/test
+  styles:
+    command: ["gulp", "--cwd=semantic", "watch"]
+    env_file:
+    - ./envfile-dev
+    volumes:
+    - type: bind
+      source: ./styles/semantic
+      target: /home/node/semantic
   server:
     command: ["nginx-debug", "-g", "daemon off;"]
     entrypoint: ["./entrypoint.sh"]
@@ -16,18 +44,3 @@ services:
     ports:
     - 8080:80
     - 8081:443
-  ux:
-    command: ["npm", "run", "dev"]
-    env_file:
-    - ./envfile-dev
-    volumes:
-    - ./ux/build:/home/node/build
-    - ./ux/src:/home/node/src
-    - ./ux/static:/home/node/static
-    - ./ux/test:/home/node/test
-  styles:
-    command: ["gulp", "--cwd=semantic", "watch"]
-    env_file:
-    - ./envfile-dev
-    volumes:
-    - ./styles/semantic:/home/node/semantic
