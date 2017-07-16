@@ -9,34 +9,45 @@ volumes:
     driver: local
 
 services:
-  server:
-    build: ./server
+  styles:
+    build: ./styles
+    command: ["gulp", "--cwd=semantic", "build"]
+    entrypoint: ["./entrypoint.sh"]
     env_file:
     - ./envfile
-    links:
-    - app
-  app:
-    build: ./app
+    volumes:
+    - type: volume
+      source: styles-dist
+      target: /home/node/dist/
+  ux:
+    build: ./ux
+    command: ["npm", "run", "build"]
+    entrypoint: ["./entrypoint.sh"]
     env_file:
     - ./envfile
-    links:
-    - db
+    volumes:
+    - type: volume
+      source: ux-dist
+      target: /home/node/dist/
+    - type: volume
+      source: styles-dist
+      target: /home/node/src/styles/
+      read_only: true
   db:
     image: postgres:9.6
     env_file:
     - ./envfile
     volumes:
     - db-data:/var/lib/postgresql/data/
-  styles:
-    build: ./styles
+  app:
+    build: ./app
     env_file:
     - ./envfile
-    volumes:
-    - styles-dist:/home/node/dist/
-  ux:
-    build: ./ux
+    links:
+    - db
+  server:
+    build: ./server
     env_file:
     - ./envfile
-    volumes:
-    - ux-dist:/home/node/dist/
-    - styles-dist:/home/node/src/styles/
+    links:
+    - app
