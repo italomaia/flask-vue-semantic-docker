@@ -6,8 +6,7 @@ services:
     - 80:80
     - 443:443
     volumes:
-    - ux-dist:/usr/share/nginx/html
-  ux:
-    command: ["yarn", "run", "build"]
-  styles:
-    command: ["gulp", "--cwd=semantic", "build"]
+    - type: volume
+      source: ux-dist
+      target: /usr/share/nginx/html
+      read_only: true
