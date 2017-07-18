@@ -27,7 +27,7 @@ services:
       source: ./ux/test
       target: /home/node/test
   styles:
-    command: ["gulp", "--cwd=semantic", "watch"]
+    command: sh -c "gulp --cwd=semantic build && gulp --cwd=semantic watch"
     env_file:
     - ./envfile-dev
     volumes:
