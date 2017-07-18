@@ -1,14 +1,18 @@
 # change <app> by your app name
 # do not keep this in vcs
-PGDATA=/var/lib/postgresql/data/app
-POSTGRES_DB=app
-POSTGRES_USER=app_user
+PGDATA=/var/lib/postgresql/data/<app>
+POSTGRES_DB=<app>
+POSTGRES_USER=<app>_user
 POSTGRES_PASSWORD=passw0rd
 
 FLASK_APP=auto.py
 FLASK_DEBUG=0
+# generate your secret with the command below
+# python -c "import os; print(os.urandom(20))"
 FLASK_SECRET=secret
-FLASK_LOGGER_NAME=app_logger
+FLASK_LOGGER_NAME=<app>_logger
 
+# SERVER_NAME should be the full domain
+# serving your application
 SERVER_NAME=
 NGINX_TEMPLATE=nginx-prd.conf

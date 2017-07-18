@@ -65,7 +65,14 @@ def do_setup():
         "IMPORTANT: run the following command:\n"
         "sudo echo \"127.0.0.1  dev\" >> /etc/hosts")
 
-    print("You're ready to go:")
+    print(
+        "IMPORTANT: make sure to update your envfile file with "
+        "your project production configuration.")
+    print(
+        "IMPORTANT: make sure to update your fabfile "
+        "hosts with your production host.")
+    print("")
+    print("Now you're ready to go:")
     print('  fab env:dev up  # for development mode')
     print('  fab env:prd up  # for production mode')
     print('  fab env:tst up  # to simulate production mode')
