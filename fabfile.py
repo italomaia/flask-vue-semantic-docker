@@ -60,7 +60,7 @@ def do_setup():
         local('npm install semantic-ui', shell='/bin/bash')
         print(
             "IMPORTANT: make sure to change semantic.json "
-            "property 'autoInstall' to false")
+            "property 'autoInstall' to true")
     print(
         "IMPORTANT: run the following command:\n"
         "sudo echo \"127.0.0.1  dev\" >> /etc/hosts")
