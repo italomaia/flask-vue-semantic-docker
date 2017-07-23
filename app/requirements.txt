@@ -1,4 +1,4 @@
-empty==0.4
+empty==0.4.1
 eventlet==0.21.0
 flask-jsglue==0.3.1
 flask-marshmallow==0.8.0
