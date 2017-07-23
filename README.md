@@ -14,7 +14,7 @@ because, well, vue does not have a non interactive install.
 
 fab env:dev up  # docker-compose up in development mode
 fab env:prd up  # docker-compose up in production mode
-fab env:prd build  # docker-compose build in development mode
+fab env:dev build  # docker-compose build in development mode
 fab env:prd build  # docker-compose build in production mode
 fab env:dev logs:name  # docker logs on container called <name>
 fab env:prd logs:name  # docker logs on container called <name>
