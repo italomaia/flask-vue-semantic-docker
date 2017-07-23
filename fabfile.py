@@ -24,6 +24,9 @@ def get_compose_cmd():
 
 
 def get_fn():
+    """
+    Returns the correct function call for the environment.
+    """
     return run if renv == 'prd' else local
 
 
@@ -89,6 +92,9 @@ def set_renv(local_renv):
 
 @task(alias='up')
 def compose_up(name=None):
+    """
+    Calls docker compose up using the correct environment.
+    """
     opt = ['-d'] if renv == 'prd' else []
 
     with cd(project_dst):
@@ -100,8 +106,35 @@ def compose_up(name=None):
 
 @task(alias='build')
 def compose_build(name=None):
+    """
+    Calls docker compose build using the correct environment.
+    """
     with cd(project_dst):
         local_cmd = get_compose_cmd() + ['build']
         local_cmd += [name] if name else []
 
         get_fn()(' '.join(local_cmd))
+
+
+@task(alias='run')
+def compose_run(cmd):
+    """
+    Calls docker compose run using the correct environment.
+
+    :param cmd: run command, including container name.
+    """
+    opt = ['--rm']
+
+    with cd(project_dst):
+        local_cmd = get_compose_cmd() + ['run']
+        local_cmd += opt
+        local_cmd += cmd.split()
+        get_fn()(' '.join(local_cmd))
+
+
+@task(alias='logs')
+def docker_logs(name):
+    """
+    Get docker container logs.
+    """
+    get_fn()('docker logs %s' % name)
