@@ -1,10 +1,14 @@
 version: '3.2'
 
+# ports are not attached to host by default
+# you're advised to use a proxy for your container
+# see: https://github.com/jwilder/nginx-proxy
+# also: https://github.com/JrCs/docker-letsencrypt-nginx-proxy-companion
+# also: https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion
+# also: https://github.com/italomaia/reverse-proxy (all stitched up proxy solution)
+
 services:
   server:
-    ports:
-    - 80:80
-    - 443:443
     volumes:
     - type: volume
       source: ux-dist
