@@ -4,6 +4,8 @@ from fabric.api import run
 from fabric.api import task
 from fabric.context_managers import cd, lcd
 
+import json
+
 env.forward_agent = True
 env.user = 'root'
 env.hosts = ['your production host']
@@ -61,9 +63,15 @@ def do_setup():
     print("Setting up SemanticUI (just accept defaults)")
     with lcd('styles'):
         local('npm install semantic-ui', shell='/bin/bash')
-        print(
-            "IMPORTANT: make sure to change semantic.json "
-            "property 'autoInstall' to true")
+
+        semantic_settings = 'semantic.json'
+        with open(semantic_settings, 'r') as fs:
+            data = json.load(fs)
+
+        data['autoInstall'] = True
+        with open(semantic_settings, 'w') as fs:
+            json.dump(data, fs)
+
     print(
         "IMPORTANT: run the following command:\n"
         "sudo echo \"127.0.0.1  dev\" >> /etc/hosts")
