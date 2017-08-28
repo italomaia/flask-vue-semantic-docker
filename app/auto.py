@@ -1,3 +1,6 @@
+import eventlet
+eventlet.monkey_patch()
+
 from empty import app_factory
 from main import App
 import config

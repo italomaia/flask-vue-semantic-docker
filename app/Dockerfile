@@ -10,8 +10,18 @@ RUN groupadd -g 1000 -r $USR && \
 
 WORKDIR $HOME
 
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir \
+  empty==0.4.2\
+  eventlet==0.21.0\
+  flask-jsglue==0.3.1\
+  flask-marshmallow==0.8.0\
+  flask-migrate==2.0.4\
+  flask-security==3.0.0\
+  flask-socketio==2.8.6\
+  flask-sqlalchemy==2.2\
+  flask-rq2\
+  psycopg2==2.7.1\
+  redis==2.10.5
 
 COPY . .
 RUN chown -R 1000:1000 .
