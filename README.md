@@ -1,7 +1,6 @@
 # What is this?
 
-Setting up **docker** + **nginx** + **flask** + **vue** + **semantic** is hardly an easy task if
-you want to setup production and development environments. This is my attempt
+Setting up **docker** + **nginx** + **flask** + **vue** + **semantic** is hardly an easy task if you want to setup production and development environments. This is my attempt
 in the matter. Notice that, some containers are not complete (ux)
 because, well, vue does not have a non interactive install.
 
@@ -12,6 +11,10 @@ because, well, vue does not have a non interactive install.
 # make sure to read each folder readme
 # make sure you have docker and docker-compose installed
 
+# call setup to install dependencies
+fab setup
+
+# now you're ready to go
 fab env:dev up  # docker-compose up in development mode
 fab env:prd up  # docker-compose up in production mode
 fab env:dev build  # docker-compose build in development mode
