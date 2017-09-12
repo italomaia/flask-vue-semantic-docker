@@ -4,6 +4,7 @@ from fabric.api import run
 from fabric.api import task
 from fabric.context_managers import cd, lcd
 
+import os
 import json
 
 env.forward_agent = True
@@ -19,6 +20,9 @@ compose_cmd = [
 ]
 
 renv = 'dev'  # dev by default
+CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+STYLES_DIR = os.path.join(CURRENT_DIR, 'styles')
+UX_DIR = os.path.join(CURRENT_DIR, 'ux')
 
 
 def get_compose_cmd():
@@ -61,10 +65,10 @@ def do_setup():
     local('vue init webpack ux', shell='/bin/bash')
 
     print("Setting up SemanticUI (just accept defaults)")
-    with lcd('styles'):
+    with lcd(STYLES_DIR):
         local('npm install semantic-ui', shell='/bin/bash')
 
-        semantic_settings = 'semantic.json'
+        semantic_settings = os.path.join(STYLES_DIR, 'semantic.json')
         with open(semantic_settings, 'r') as fs:
             data = json.load(fs)
 
