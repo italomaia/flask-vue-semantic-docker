@@ -23,6 +23,12 @@ services:
       source: ./ux/build
       target: /home/node/build
     - type: bind
+      source: ./ux/index.html
+      target: /home/node/index.html
+    - type: bind
+      source: ./ux/package.json
+      target: /home/node/package.json
+    - type: bind
       source: ./ux/src
       target: /home/node/src
     - type: bind
