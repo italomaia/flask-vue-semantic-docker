@@ -20,6 +20,7 @@ RUN pip install --no-cache-dir \
   flask-socketio==2.8.6\
   flask-sqlalchemy==2.2\
   flask-rq2\
+  marshmallow-sqlalchemy==0.13.1\
   psycopg2==2.7.1\
   redis==2.10.5
 
