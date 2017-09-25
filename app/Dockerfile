@@ -16,6 +16,7 @@ RUN pip install --no-cache-dir \
   flask-jsglue==0.3.1\
   flask-marshmallow==0.8.0\
   flask-migrate==2.0.4\
+  flask-restful==0.3.6\
   flask-security==3.0.0\
   flask-socketio==2.8.6\
   flask-sqlalchemy==2.2\
