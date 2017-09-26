@@ -19,6 +19,8 @@ compose_cmd = [
     '-f',
 ]
 
+# service to run commands against
+service_name = None
 renv = 'dev'  # dev by default
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 STYLES_DIR = os.path.join(CURRENT_DIR, 'styles')
@@ -128,6 +130,15 @@ def compose_build(name=None):
         get_fn()(' '.join(local_cmd))
 
 
+@task(alias='on')
+def on_service(name):
+    """
+    Define service where command should run
+    """
+    global service_name
+    service_name = name
+
+
 @task(alias='run')
 def compose_run(cmd):
     """
@@ -137,9 +148,14 @@ def compose_run(cmd):
     """
     opt = ['--rm']
 
+    if service_name is None:
+        print("please, provide service name")
+        exit()
+
     with cd(project_dst):
         local_cmd = get_compose_cmd() + ['run']
         local_cmd += opt
+        local_cmd += [service_name]
         local_cmd += cmd.split()
         get_fn()(' '.join(local_cmd))
 
