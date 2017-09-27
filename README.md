@@ -51,6 +51,14 @@ plugins: [
     ...
 ```
 
+You'll also have to exclude `./src/styles` from your linting, to avoid
+errors. Edit `webpack.base.conf.js` like this:
+
+```
+include: [resolve('src'), resolve('test')],  // this line already exists
+exclude: [resolve('src/styles')],  // add this line below
+```
+
 I'll eventually bundle the above steps into the setup, but for now,
 that is not the case.
 
