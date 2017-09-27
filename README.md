@@ -25,6 +25,35 @@ fab env:dev logs:name  # docker logs on container called <name>
 fab env:prd logs:name  # docker logs on container called <name>
 ```
 
+**You'll also have to** change a few things in your project to
+load **semantic-ui** properly. Add the following to your ux/src/main.js:
+
+```
+require('./styles/semantic.min.css')
+require('./styles/semantic.min.js')
+```
+
+Also install jquery:
+
+```
+fab env:dev on:ux run:"yarn add jquery"
+```
+
+And make sure it is loaded through ProvidePlugin in all your
+environments (that means ux/build/dev.js, ux/build/prod.js and ux/build/test.js) like this:
+
+```
+plugins: [
+    new webpack.ProvidePlugin({
+      '$': 'jquery',
+      'jQuery': 'jquery',
+    }),
+    ...
+```
+
+I'll eventually bundle the above steps into the setup, but for now,
+that is not the case.
+
 ## What is what?
 
 * app -> flask application container
@@ -33,6 +62,10 @@ fab env:prd logs:name  # docker logs on container called <name>
 * ux -> vuejs application container
 
 ## Changelog
+
+**0.2.3**
+
+* Added `on:<service>` task; it is used to pick which service your command is run against. Right now, only works with `run`.
 
 **0.2.2**
 
