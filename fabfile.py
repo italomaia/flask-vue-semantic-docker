@@ -43,7 +43,7 @@ def get_cmd_exists(cmd):
         if rs:
             print('"%s" found in path.' % arg)
         else:
-            print('"%s" not found in path. Cannot continue.' % arg)
+            print('"%s" not found in path. Please, install it to continue.' % arg)  # noqa
         return rs
 
     fn = get_fn()
@@ -57,8 +57,8 @@ def do_setup():
     Helps you setup your environment. Call it once per project.
     """
     msg = "Command not found. Please, install %s"
-    assert get_cmd_exists('vue'), msg % "vue-cli"
     assert get_cmd_exists('npm'), msg % "npm"
+    assert get_cmd_exists('vue'), msg % "vue-cli"
     assert get_cmd_exists('fab'), msg % "fabric3"
     assert get_cmd_exists('docker'), msg % "docker"
     assert get_cmd_exists('docker-compose'), msg % "docker-compose"
