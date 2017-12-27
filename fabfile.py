@@ -80,7 +80,7 @@ def do_setup():
 
     print(
         "IMPORTANT: run the following command:\n"
-        "sudo echo \"127.0.0.1  dev\" >> /etc/hosts")
+        "sudo echo \"127.0.0.1  dv\" >> /etc/hosts")
 
     print(
         "IMPORTANT: make sure to update your envfile file with "
