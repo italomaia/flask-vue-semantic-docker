@@ -2,6 +2,7 @@ FROM python:3.6
 
 ENV USR nonroot
 ENV HOME /home/$USR
+ENV PYTHONUNBUFFERED 1
 
 EXPOSE 5000
 
