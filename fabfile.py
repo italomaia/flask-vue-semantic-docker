@@ -93,7 +93,7 @@ def do_setup():
     print('  fab env:dev up  # for development mode')
     print('  fab env:prd up  # for production mode')
     print('  fab env:tst up  # to simulate production mode')
-    print('Locally, your project will be available at http://dev:8080')
+    print('Locally, your project will be available at http://dv:8080')
 
 
 @task(alias='env')
