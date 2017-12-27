@@ -1,4 +1,4 @@
-FROM node:8
+FROM node:9
 
 ENV USR node
 ENV HOME /home/$USR

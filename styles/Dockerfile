@@ -1,4 +1,4 @@
-FROM node:8-slim
+FROM node:9-slim
 
 ENV USR node
 ENV HOME /home/$USR
