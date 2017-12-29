@@ -96,6 +96,7 @@ dev: {
 **0.2.4**
 
 * webpack dev server endpoints have changed. Updated, so nginx can route to them.
+* version bump for docker base images (node's, actually)
 
 **0.2.3**
 
