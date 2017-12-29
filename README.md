@@ -93,6 +93,10 @@ dev: {
 
 ## Changelog
 
+**0.2.4**
+
+* webpack dev server endpoints have changed. Updated, so nginx can route to them.
+
 **0.2.3**
 
 * Added `on:<service>` task; it is used to pick which service your command is run against. Right now, only works with `run`.
