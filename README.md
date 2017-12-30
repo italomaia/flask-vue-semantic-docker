@@ -40,15 +40,21 @@ fab env:dev on:ux run:"yarn add jquery"
 ```
 
 And make sure it is loaded through ProvidePlugin in all your
-environments (that means ux/build/dev.js, ux/build/prod.js and ux/build/test.js) like this:
+environments (that means build/webpack.base.conf.js) like this:
 
 ```
-plugins: [
+const webpack = require('webpack')
+...
+
+module.exports = {
+  ...
+  plugins: [
     new webpack.ProvidePlugin({
       '$': 'jquery',
       'jQuery': 'jquery',
-    }),
-    ...
+    })
+  ]
+}
 ```
 
 You'll also have to exclude `./src/styles` from your linting, to avoid
