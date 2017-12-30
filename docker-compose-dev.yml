@@ -23,6 +23,9 @@ services:
       source: ./ux/build
       target: /home/node/build
     - type: bind
+      source: ./ux/node_modules
+      target: /home/node/node_modules
+    - type: bind
       source: ./ux/index.html
       target: /home/node/index.html
     - type: bind
