@@ -97,6 +97,21 @@ dev: {
 }
 ```
 
+If code change in **ux** doesn't trigger app reload, change the following:
+
+```
+# in ux/config/index.js
+module.exports = {
+  ...
+  dev: {
+    ...
+    poll: true,  # set it to true
+    ...
+  }
+  ...
+}
+```
+
 ## Changelog
 
 **0.2.4**
