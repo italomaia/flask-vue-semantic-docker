@@ -25,50 +25,6 @@ fab env:dev logs:name  # docker logs on container called <name>
 fab env:prd logs:name  # docker logs on container called <name>
 ```
 
-**You'll also have to** change a few things in your project to
-load **semantic-ui** properly. Add the following to your ux/src/main.js:
-
-```
-require('./styles/semantic.min.css')
-require('./styles/semantic.min.js')
-```
-
-Also install jquery:
-
-```
-fab env:dev on:ux run:"yarn add jquery"
-```
-
-And make sure it is loaded through ProvidePlugin in all your
-environments (that means build/webpack.base.conf.js) like this:
-
-```
-const webpack = require('webpack')
-...
-
-module.exports = {
-  ...
-  plugins: [
-    new webpack.ProvidePlugin({
-      '$': 'jquery',
-      'jQuery': 'jquery',
-      'window.jQuery': 'jquery'
-    })
-  ]
-}
-```
-
-You'll also have to exclude `./src/styles` from your linting, to avoid
-errors. Edit `webpack.base.conf.js` like this:
-
-```
-include: [resolve('src'), resolve('test')],  // this line already exists
-exclude: [resolve('src/styles')],  // add this line below
-```
-
-I'll eventually bundle the above steps into the setup, but for now,
-that is not the case.
-
 ## What is what?
 
 * app -> flask application container
@@ -78,34 +34,16 @@ that is not the case.
 
 ## Trouble?
 
-As webpack is a every-changing beast, you might have to add the following
-code **to make your development environment work**:
-
-```
-# in config/index.js
-dev: {
-  ...
-  host: '0.0.0.0',  # change host bind to 0.0.0.0
-  ...
-}
-```
-
-If code change in **ux** doesn't trigger app reload, change the following:
-
-```
-# in ux/config/index.js
-module.exports = {
-  ...
-  dev: {
-    ...
-    poll: true,  # set it to true
-    ...
-  }
-  ...
-}
-```
+As webpack is a every-changing beast, leave a issue at
+https://github.com/italomaia/flask-vue-semantic-docker/issues if
+something doesn't work. There might have been a change in a
+dependency at some point.
 
 ## Changelog
+
+**0.2.5**
+
+* Readme instructions are now configured by default
 
 **0.2.4**
 
