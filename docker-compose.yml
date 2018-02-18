@@ -34,7 +34,7 @@ services:
       target: /home/node/src/styles/
       read_only: true
   db:
-    image: postgres:9.6
+    image: postgres:10
     env_file:
     - ./envfile
     volumes:
