@@ -33,31 +33,6 @@ require('./styles/semantic.min.css')
 require('./styles/semantic.min.js')
 ```
 
-Also install jquery:
-
-```
-fab env:dev on:ux run:"yarn add jquery"
-```
-
-And make sure it is loaded through ProvidePlugin in all your
-environments (that means build/webpack.base.conf.js) like this:
-
-```
-const webpack = require('webpack')
-...
-
-module.exports = {
-  ...
-  plugins: [
-    new webpack.ProvidePlugin({
-      '$': 'jquery',
-      'jQuery': 'jquery',
-      'window.jQuery': 'jquery'
-    })
-  ]
-}
-```
-
 You'll also have to exclude `./src/styles` from your linting, to avoid
 errors. Edit `webpack.base.conf.js` like this:
 
