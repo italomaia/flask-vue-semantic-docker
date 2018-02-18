@@ -7,6 +7,14 @@ version: '3.2'
 # also: https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion
 # also: https://github.com/italomaia/reverse-proxy (all stitched up proxy solution)
 
+secrets:
+  flask_secret_key:
+    file: ./secrets/flask_secret_key
+  postgres_usr:
+    file: ./secrets/postgres_usr
+  postgres_pwd:
+    file: ./secrets/postgres_pwd
+
 services:
   server:
     volumes:

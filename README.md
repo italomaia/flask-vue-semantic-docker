@@ -82,14 +82,6 @@ As webpack is a every-changing beast, you might have to add the following
 code **to make your development environment work**:
 
 ```
-# in build/webpack.dev.conf.js
-
-devServer: {
-  ...
-  disableHostCheck: true,  # add this option
-  ...
-}
-
 # in config/index.js
 dev: {
   ...
