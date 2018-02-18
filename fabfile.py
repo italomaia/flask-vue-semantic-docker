@@ -89,6 +89,20 @@ def update_webpack_dev_conf(conf_path):
         fs.write(''.join(lines))
 
 
+def update_ux_main(path):
+    with open(path) as fs:
+        lines = fs.readlines()
+
+    line_to_insert = "\n"\
+        "require('./styles/semantic.min.css')\n"\
+        "require('./styles/semantic.min.js')\n"
+    line_condition = "productionTip"
+    insert_line_after(lines, line_to_insert, line_condition)
+
+    with open(path, 'w') as fs:
+        fs.write(''.join(lines))
+
+
 @task(alias='setup')
 def do_setup():
     """
@@ -106,6 +120,7 @@ def do_setup():
 
     update_webpack_base_conf("ux/build/webpack.base.conf.js")
     update_webpack_dev_conf("ux/build/webpack.dev.conf.js")
+    update_ux_main("ux/src/main.js")
 
     with lcd(UX_DIR):
         local("yarn add jquery")
