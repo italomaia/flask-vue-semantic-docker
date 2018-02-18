@@ -4,9 +4,8 @@ ENV USR node
 ENV HOME /home/$USR
 
 WORKDIR $HOME
-COPY . .
+COPY --chown=1000:1000 . .
 RUN chmod +x entrypoint.sh
-RUN chown -R 1000:1000 .
 
 USER $USR
 RUN yarn --non-interactive --no-progress --no-lockfile && \
