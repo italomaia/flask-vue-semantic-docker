@@ -58,6 +58,25 @@ def insert_line_after(lines, line, after):
             break
 
 
+def replace_line(lines, line, condition):
+    for i in range(len(lines)):
+        if condition in lines[i]:
+            lines[i] = line
+            break
+
+
+def update_webpack_config(path):
+    with open(path) as fs:
+        lines = fs.readlines()
+
+    line_to_insert = "    poll: 800,\n"
+    line_condition = "poll: false"
+    replace_line(lines, line_to_insert, line_condition)
+
+    with open(path, 'w') as fs:
+        fs.write(''.join(lines))
+
+
 def update_webpack_base_conf(conf_path):
     with open(conf_path) as fs:
         lines = fs.readlines()
@@ -122,6 +141,7 @@ def do_setup():
     print("Setting up VueJS (just accept defaults)")
     local('vue init webpack ux', shell='/bin/bash')
 
+    update_webpack_config("ux/config/index.js")
     update_webpack_base_conf("ux/build/webpack.base.conf.js")
     update_webpack_dev_conf("ux/build/webpack.dev.conf.js")
     update_ux_main("ux/src/main.js")
