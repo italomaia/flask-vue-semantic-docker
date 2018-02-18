@@ -58,17 +58,35 @@ def insert_line_after(lines, line, after):
             break
 
 
-def update_webpack_dev_conf(conf_path):
-    # add disable host check; required for development with webpack
+def update_webpack_base_conf(conf_path):
     with open(conf_path) as fs:
-        webpack_dev_conf_lines = fs.readlines()
+        lines = fs.readlines()
 
-    line_to_insert = '    disableHostCheck: true,\n'
-    line_condition = 'devServer: {'
-    insert_line_after(webpack_dev_conf_lines, line_to_insert, line_condition)
+    line_to_insert = ""
+    "  plugins: [\n"
+    "    new webpack.ProvidePlugin({\n"
+    "    '$': 'jquery',\n"
+    "    'jQuery': 'jquery',\n"
+    "    'window.jQuery': 'jquery'\n"
+    "  }),\n"
+    line_condition = 'module.exports = {'
+    insert_line_after(lines, line_to_insert, line_condition)
 
     with open(conf_path, 'w') as fs:
-        fs.write(''.join(webpack_dev_conf_lines))
+        fs.write(''.join(lines))
+
+
+def update_webpack_dev_conf(conf_path):
+    with open(conf_path) as fs:
+        lines = fs.readlines()
+
+    # add disable host check; required for development with webpack
+    line_to_insert = '    disableHostCheck: true,\n'
+    line_condition = 'devServer: {'
+    insert_line_after(lines, line_to_insert, line_condition)
+
+    with open(conf_path, 'w') as fs:
+        fs.write(''.join(lines))
 
 
 @task(alias='setup')
@@ -86,7 +104,11 @@ def do_setup():
     print("Setting up VueJS (just accept defaults)")
     local('vue init webpack ux', shell='/bin/bash')
 
-    update_webpack_dev_conf('ux/build/webpack.dev.conf.js')
+    update_webpack_base_conf("ux/build/webpack.base.conf.js")
+    update_webpack_dev_conf("ux/build/webpack.dev.conf.js")
+
+    with lcd(UX_DIR):
+        local("npm install jquery --save")
 
     print("Setting up SemanticUI (just accept defaults)")
     with lcd(STYLES_DIR):
