@@ -62,13 +62,13 @@ def update_webpack_base_conf(conf_path):
     with open(conf_path) as fs:
         lines = fs.readlines()
 
-    line_to_insert = ""
-    "  plugins: [\n"
-    "    new webpack.ProvidePlugin({\n"
-    "    '$': 'jquery',\n"
-    "    'jQuery': 'jquery',\n"
-    "    'window.jQuery': 'jquery'\n"
-    "  }),\n"
+    line_to_insert = ""\
+        "  plugins: [\n"\
+        "    new webpack.ProvidePlugin({\n"\
+        "    '$': 'jquery',\n"\
+        "    'jQuery': 'jquery',\n"\
+        "    'window.jQuery': 'jquery'\n"\
+        "  }),\n"
     line_condition = 'module.exports = {'
     insert_line_after(lines, line_to_insert, line_condition)
 
