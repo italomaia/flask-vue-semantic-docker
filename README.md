@@ -25,17 +25,6 @@ fab env:dev logs:name  # docker logs on container called <name>
 fab env:prd logs:name  # docker logs on container called <name>
 ```
 
-You'll also have to exclude `./src/styles` from your linting, to avoid
-errors. Edit `webpack.base.conf.js` like this:
-
-```
-include: [resolve('src'), resolve('test')],  // this line already exists
-exclude: [resolve('src/styles')],  // add this line below
-```
-
-I'll eventually bundle the above steps into the setup, but for now,
-that is not the case.
-
 ## What is what?
 
 * app -> flask application container
