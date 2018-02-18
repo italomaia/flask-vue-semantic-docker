@@ -34,32 +34,10 @@ fab env:prd logs:name  # docker logs on container called <name>
 
 ## Trouble?
 
-As webpack is a every-changing beast, you might have to add the following
-code **to make your development environment work**:
-
-```
-# in config/index.js
-dev: {
-  ...
-  host: '0.0.0.0',  # change host bind to 0.0.0.0
-  ...
-}
-```
-
-If code change in **ux** doesn't trigger app reload, change the following:
-
-```
-# in ux/config/index.js
-module.exports = {
-  ...
-  dev: {
-    ...
-    poll: true,  # set it to true
-    ...
-  }
-  ...
-}
-```
+As webpack is a every-changing beast, leave a issue at
+https://github.com/italomaia/flask-vue-semantic-docker/issues if
+something doesn't work. There might have been a change in a
+dependency at some point.
 
 ## Changelog
 
