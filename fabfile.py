@@ -108,7 +108,7 @@ def do_setup():
     update_webpack_dev_conf("ux/build/webpack.dev.conf.js")
 
     with lcd(UX_DIR):
-        local("yarn add jquery")
+        local("npm install jquery --save")
 
     print("Setting up SemanticUI (just accept defaults)")
     with lcd(STYLES_DIR):
