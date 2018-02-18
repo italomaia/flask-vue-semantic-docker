@@ -68,7 +68,7 @@ def update_webpack_base_conf(conf_path):
         "    '$': 'jquery',\n"\
         "    'jQuery': 'jquery',\n"\
         "    'window.jQuery': 'jquery'\n"\
-        "  }),\n"
+        "  })],\n"
     line_condition = 'module.exports = {'
     insert_line_after(lines, line_to_insert, line_condition)
 
