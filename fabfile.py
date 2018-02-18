@@ -51,6 +51,13 @@ def get_cmd_exists(cmd):
     return tell_on(cmd, ('not found' not in rs))
 
 
+def insert_line(lines, line, condition):
+    for i in range(len(lines)):
+        if condition in lines[i]:
+            lines.insert(i+i, line)
+            break
+
+
 @task(alias='setup')
 def do_setup():
     """
@@ -65,6 +72,14 @@ def do_setup():
 
     print("Setting up VueJS (just accept defaults)")
     local('vue init webpack ux', shell='/bin/bash')
+
+    webpack_dev_conf_path = 'ux/build/webpack.dev.conf.js'
+    with open(webpack_dev_conf_path) as fs:
+        webpack_dev_conf_lines = fs.readlines()
+
+    insert_line(webpack_dev_conf_lines, '    disableHostCheck: true,', 'devServer: {')  # noqa: E501
+    with open(webpack_dev_conf_path, 'w') as fs:
+        fs.write('\n'.join(webpack_dev_conf_lines))
 
     print("Setting up SemanticUI (just accept defaults)")
     with lcd(STYLES_DIR):
