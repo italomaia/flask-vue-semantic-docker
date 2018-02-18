@@ -54,7 +54,7 @@ def get_cmd_exists(cmd):
 def insert_line_after(lines, line, after):
     for i in range(len(lines)):
         if after in lines[i]:
-            lines.insert(i+i, line)
+            lines.insert(i+1, line)
             break
 
 
