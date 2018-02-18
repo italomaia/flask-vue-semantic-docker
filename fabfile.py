@@ -72,6 +72,10 @@ def update_webpack_base_conf(conf_path):
     line_condition = 'module.exports = {'
     insert_line_after(lines, line_to_insert, line_condition)
 
+    line_to_insert = "exclude: [resolve('src/styles')],\n"
+    line_condition = "include: [resolve('src'), resolve('test')]"
+    insert_line_after(lines, line_to_insert, line_condition)
+
     with open(conf_path, 'w') as fs:
         fs.write(''.join(lines))
 
