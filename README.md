@@ -25,14 +25,6 @@ fab env:dev logs:name  # docker logs on container called <name>
 fab env:prd logs:name  # docker logs on container called <name>
 ```
 
-**You'll also have to** change a few things in your project to
-load **semantic-ui** properly. Add the following to your ux/src/main.js:
-
-```
-require('./styles/semantic.min.css')
-require('./styles/semantic.min.js')
-```
-
 You'll also have to exclude `./src/styles` from your linting, to avoid
 errors. Edit `webpack.base.conf.js` like this:
 
