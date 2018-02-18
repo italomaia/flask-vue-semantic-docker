@@ -51,6 +51,26 @@ def get_cmd_exists(cmd):
     return tell_on(cmd, ('not found' not in rs))
 
 
+def insert_line_after(lines, line, after):
+    for i in range(len(lines)):
+        if after in lines[i]:
+            lines.insert(i+i, line)
+            break
+
+
+def update_webpack_dev_conf(conf_path):
+    # add disable host check; required for development with webpack
+    with open(conf_path) as fs:
+        webpack_dev_conf_lines = fs.readlines()
+
+    line_to_insert = '    disableHostCheck: true,\n'
+    line_condition = 'devServer: {'
+    insert_line_after(webpack_dev_conf_lines, line_to_insert, line_condition)
+
+    with open(conf_path, 'w') as fs:
+        fs.write(''.join(webpack_dev_conf_lines))
+
+
 @task(alias='setup')
 def do_setup():
     """
@@ -65,6 +85,8 @@ def do_setup():
 
     print("Setting up VueJS (just accept defaults)")
     local('vue init webpack ux', shell='/bin/bash')
+
+    update_webpack_dev_conf('ux/build/webpack.dev.conf.js')
 
     print("Setting up SemanticUI (just accept defaults)")
     with lcd(STYLES_DIR):
