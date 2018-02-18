@@ -12,7 +12,7 @@ RUN groupadd -g 1000 -r $USR && \
 WORKDIR $HOME
 
 RUN pip install --no-cache-dir \
-  empty==0.4.2\
+  empty==0.4.3\
   eventlet==0.21.0\
   flask-jsglue==0.3.1\
   flask-marshmallow==0.8.0\
