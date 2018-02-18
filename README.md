@@ -41,6 +41,10 @@ dependency at some point.
 
 ## Changelog
 
+**0.2.5**
+
+* Readme instructions are now configured by default
+
 **0.2.4**
 
 * webpack dev server endpoints have changed. Updated, so nginx can route to them.
