@@ -8,6 +8,10 @@ FLASK_DEBUG=1
 FLASK_SECRET=secret
 FLASK_LOGGER_NAME=app_logger
 
+# ux dev configuration
+HOST=ux
+PORT=8080
+
 SERVER_NAME=dv
 SERVER_NAME_EXTRA=:8080
 NGINX_TEMPLATE=nginx-dev.conf
