@@ -41,6 +41,10 @@ dependency at some point.
 
 ## Changelog
 
+**0.2.6**
+
+* Fixed source reload on ux code change during dev
+
 **0.2.5**
 
 * Readme instructions are now configured by default

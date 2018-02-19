@@ -9,7 +9,7 @@ FLASK_SECRET=secret
 FLASK_LOGGER_NAME=app_logger
 
 # ux dev configuration
-HOST=ux
+HOST=0.0.0.0
 PORT=8080
 
 SERVER_NAME=dv
