@@ -8,9 +8,8 @@ RUN yarn global add gulp --non-interactive --no-progress --no-lockfile && \
 
 WORKDIR $HOME
 
-COPY . .
+COPY --chown=1000:1000 . .
 RUN chmod +x entrypoint.sh
-RUN chown -R 1000:1000 .
 
 USER $USR
 RUN yarn add semantic-ui --ignore-scripts --non-interactive --no-progress --no-lockfile && \
