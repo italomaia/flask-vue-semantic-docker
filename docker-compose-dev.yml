@@ -12,7 +12,7 @@ services:
     volumes:
     - type: bind
       source: ./app
-      target: /home/nonroot
+      target: /home/nonroot/code
   ux:
     command: ["npm", "run", "dev"]
     entrypoint: ["./entrypoint.sh"]
