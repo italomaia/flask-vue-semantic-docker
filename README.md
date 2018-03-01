@@ -41,6 +41,10 @@ dependency at some point.
 
 ## Changelog
 
+**0.2.7**
+
+* Flask "app" is now built inside $HOME/code to avoid bash session dirty
+
 **0.2.6**
 
 * Fixed source reload on ux code change during dev
