@@ -43,7 +43,8 @@ dependency at some point.
 
 **0.2.7**
 
-* Flask "app" is now built inside $HOME/code to avoid bash session dirty
+* Flask "app" is now built inside $HOME/code to avoid bash session dirt
+* Vue.JS "ux" is now built inside $HOME/code to avoid bash session dirt
 
 **0.2.6**
 

@@ -20,26 +20,8 @@ services:
     - ./envfile-dev
     volumes:
     - type: bind
-      source: ./ux/build
-      target: /home/node/build
-    - type: bind
-      source: ./ux/node_modules
-      target: /home/node/node_modules
-    - type: bind
-      source: ./ux/index.html
-      target: /home/node/index.html
-    - type: bind
-      source: ./ux/package.json
-      target: /home/node/package.json
-    - type: bind
-      source: ./ux/src
-      target: /home/node/src
-    - type: bind
-      source: ./ux/static
-      target: /home/node/static
-    - type: bind
-      source: ./ux/test
-      target: /home/node/test
+      source: ./ux
+      target: /home/node/code
   styles:
     command: sh -c "gulp --cwd=semantic build && gulp --cwd=semantic watch"
     env_file:
