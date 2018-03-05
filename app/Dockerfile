@@ -28,6 +28,6 @@ RUN pip install --no-cache-dir \
 USER ${USR}
 RUN mkdir ${PROJECT_DIR}
 WORKDIR ${PROJECT_DIR}
-COPY --chown=1000:1000 . .
+COPY --chown=nonroot:nonroot . .
 
 CMD ["flask", "run", "-h", "0.0.0.0"]
