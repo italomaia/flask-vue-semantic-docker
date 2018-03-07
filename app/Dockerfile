@@ -1,15 +1,14 @@
 FROM python:3.6
 
 ENV USR nonroot
-ENV HOME /home/$USR
+ENV HOME /home/${USR}
+ENV PROJECT_DIR ${HOME}/code
 ENV PYTHONUNBUFFERED 1
 
 EXPOSE 5000
 
-RUN groupadd -g 1000 -r $USR && \
-  useradd -u 1000 -d $HOME -m -r -g $USR $USR
-
-WORKDIR $HOME
+RUN groupadd -g 1000 -r ${USR} && \
+  useradd -u 1000 -d $HOME -m -r -g ${USR} ${USR}
 
 RUN pip install --no-cache-dir \
   empty==0.4.3\
@@ -26,8 +25,9 @@ RUN pip install --no-cache-dir \
   psycopg2==2.7.1\
   redis==2.10.5
 
-COPY . .
-RUN chown -R 1000:1000 .
+USER ${USR}
+RUN mkdir ${PROJECT_DIR}
+WORKDIR ${PROJECT_DIR}
+COPY --chown=nonroot:nonroot . .
 
-USER $USR
 CMD ["flask", "run", "-h", "0.0.0.0"]

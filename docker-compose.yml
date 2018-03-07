@@ -28,10 +28,10 @@ services:
     volumes:
     - type: volume
       source: ux-dist
-      target: /home/node/dist/
+      target: /home/node/code/dist/
     - type: volume
       source: styles-dist
-      target: /home/node/src/styles/
+      target: /home/node/code/src/styles/
       read_only: true
   db:
     image: postgres:10

@@ -25,6 +25,7 @@ renv = 'dev'  # dev by default
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 STYLES_DIR = os.path.join(CURRENT_DIR, 'styles')
 UX_DIR = os.path.join(CURRENT_DIR, 'ux')
+APP_DIR = os.path.join(CURRENT_DIR, 'app')
 
 
 def get_compose_cmd():
@@ -142,19 +143,34 @@ def do_setup():
     assert get_cmd_exists('docker'), msg % "docker"
     assert get_cmd_exists('docker-compose'), msg % "docker-compose"
 
-    print("Setting up VueJS (just accept defaults)")
+    with lcd(APP_DIR):
+        # make sure entrypoint has execution permission
+        # so that the development environment doesn't break
+        local('chmod +x entrypoint.sh')
+
+    # do not change the directory context here
     local('vue init webpack ux', shell='/bin/bash')
 
-    update_webpack_config("ux/config/index.js")
-    update_webpack_base_conf("ux/build/webpack.base.conf.js")
-    update_webpack_dev_conf("ux/build/webpack.dev.conf.js")
-    update_ux_main("ux/src/main.js")
-
     with lcd(UX_DIR):
+        print("Setting up VueJS (just accept defaults)")
+
+        # make sure entrypoint has execution permission
+        # so that the development environment doesn't break
+        local('chmod +x entrypoint.sh')
+
+        update_webpack_config("ux/config/index.js")
+        update_webpack_base_conf("ux/build/webpack.base.conf.js")
+        update_webpack_dev_conf("ux/build/webpack.dev.conf.js")
+        update_ux_main("ux/src/main.js")
+
         local("yarn add jquery")
 
-    print("Setting up SemanticUI (just accept defaults)")
     with lcd(STYLES_DIR):
+        print("Setting up SemanticUI (just accept defaults)")
+
+        # make sure entrypoint has execution permission
+        # so that the development environment doesn't break
+        local('chmod +x entrypoint.sh')
         local('npm install semantic-ui', shell='/bin/bash')
 
         semantic_settings = os.path.join(STYLES_DIR, 'semantic.json')
