@@ -1,16 +1,16 @@
 FROM node:9-slim
 
 ENV USR node
-ENV HOME /home/$USR
+ENV HOME /home/${USR}
 
 RUN yarn global add gulp --non-interactive --no-progress --no-lockfile && \
   yarn cache clean --force
 
-WORKDIR $HOME
+USER ${USR}
+WORKDIR ${HOME}
 
-COPY --chown=1000:1000 . .
+COPY --chown=node:node . .
 RUN chmod +x entrypoint.sh
 
-USER $USR
 RUN yarn add semantic-ui --ignore-scripts --non-interactive --no-progress --no-lockfile && \
   yarn cache clean --force
