@@ -148,23 +148,24 @@ def do_setup():
         # so that the development environment doesn't break
         local('chmod +x entrypoint.sh')
 
-    print("Setting up VueJS (just accept defaults)")
-    local('vue init webpack ux', shell='/bin/bash')
-
     with lcd(UX_DIR):
+        print("Setting up VueJS (just accept defaults)")
+
         # make sure entrypoint has execution permission
         # so that the development environment doesn't break
         local('chmod +x entrypoint.sh')
+        local('vue init webpack ux', shell='/bin/bash')
 
-        update_webpack_config("config/index.js")
-        update_webpack_base_conf("build/webpack.base.conf.js")
-        update_webpack_dev_conf("build/webpack.dev.conf.js")
-        update_ux_main("src/main.js")
+        update_webpack_config("ux/config/index.js")
+        update_webpack_base_conf("ux/build/webpack.base.conf.js")
+        update_webpack_dev_conf("ux/build/webpack.dev.conf.js")
+        update_ux_main("ux/src/main.js")
 
         local("yarn add jquery")
 
-    print("Setting up SemanticUI (just accept defaults)")
     with lcd(STYLES_DIR):
+        print("Setting up SemanticUI (just accept defaults)")
+
         # make sure entrypoint has execution permission
         # so that the development environment doesn't break
         local('chmod +x entrypoint.sh')
