@@ -41,6 +41,10 @@ dependency at some point.
 
 ## Changelog
 
+**0.3.1**
+
+* Added more feedback on dependencies
+
 **0.3.0**
 
 * Nothing, really
