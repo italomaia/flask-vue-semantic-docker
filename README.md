@@ -41,6 +41,10 @@ dependency at some point.
 
 ## Changelog
 
+**0.3.0**
+
+* Nothing, really
+
 **0.2.8**
 
 * Fixed semantic files import
