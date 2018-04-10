@@ -122,8 +122,8 @@ def update_ux_main(path):
         lines = fs.readlines()
 
     line_to_insert = "\n"\
-        "require('./styles/semantic.min.css')\n"\
-        "require('./styles/semantic.min.js')\n"
+        "require('./styles/semantic.css')\n"\
+        "require('./styles/semantic.js')\n"
     line_condition = "productionTip"
     insert_line_after(lines, line_to_insert, line_condition)
 
