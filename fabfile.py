@@ -138,6 +138,8 @@ def do_setup():
     """
     msg = "Command not found. Please, install %s"
     assert get_cmd_exists('npm'), msg % "npm"
+    assert get_cmd_exists('gulp'), msg % "gulp"
+    assert get_cmd_exists('yarn'), msg % "yarn"
     assert get_cmd_exists('vue'), msg % "vue-cli"
     assert get_cmd_exists('fab'), msg % "fabric3"
     assert get_cmd_exists('docker'), msg % "docker"
